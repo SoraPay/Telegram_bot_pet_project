@@ -1,0 +1,43 @@
+# Секреты и конфиденциальные данные
+.env
+*.secrets.json
+
+# Файлы сборки .NET
+bin/
+obj/
+*.csproj.user
+*.suo
+*.user
+*.sln.docstates
+
+# Логи
+Logs/
+*.log
+
+# Временные файлы Visual Studio
+.vscode/
+.vs/
+*.swp
+*~
+
+# Папки и файлы Docker
+docker-compose.override.yml
+*.dockerignore
+
+# Артефакты публикации
+publish/
+
+# Файлы NuGet
+packages/
+*.nupkg
+
+# Файлы базы данных (если они локально создаются)
+*.db
+*.mdf
+*.ldf
+
+# Временные файлы миграций или тестов
+TestResults/
+*.trx
+
+!Config/appsettings.json

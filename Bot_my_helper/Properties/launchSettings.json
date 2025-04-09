@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Bot_my_helper": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

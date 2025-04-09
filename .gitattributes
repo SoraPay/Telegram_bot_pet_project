@@ -1,0 +1,11 @@
+# Для Windows-файлов использовать CRLF
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.pubxml text eol=crlf
+
+# Для Linux/Docker-файлов использовать LF
+*.yml text eol=lf
+*.sql text eol=lf
+
+# Остальные текстовые файлы — автоопределение
+* text=auto

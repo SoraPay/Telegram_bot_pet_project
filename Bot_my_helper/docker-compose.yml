@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - TelegramBot__ApiToken=${TELEGRAM_BOT_TOKEN}
+      - TelegramBot__LogChatId=${TELEGRAM_LOG_CHAT_ID}
+      - ConnectionStrings__DefaultConnection=${MYSQL_CONNECTION_STRING}
+      - ConnectionStringsRedis__DefaultConnection=${REDIS_CONNECTION_STRING}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=telegembot
+      - MYSQL_BOTUSER_PASSWORD=${MYSQL_BOTUSER_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4.2
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+volumes:
+  db-data:
+  redis-data:
